@@ -6,10 +6,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Title from '../../../components/Navigation/Title';
+import Button from '@material-ui/core/Button';
 import api from '../../../utils/API';
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         overflowX: 'auto',
@@ -17,7 +18,13 @@ const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
-});
+    button: {
+        margin: theme.spacing(1),
+    },
+    input: {
+        display: 'none',
+    },
+}));
 
 const initialState = {
     building: [],
@@ -57,7 +64,17 @@ export default function MainUsuario() {
                                 {building.name}
                             </TableCell>
                             <TableCell>{building.status ? "Ativo" : "Inativo"}</TableCell>
-                            <TableCell align="center">Botões</TableCell>
+                            <TableCell align="center">
+                                <Button href={"building/details/" + building.id} className={classes.button}>
+                                    Detalhes
+                                </Button>
+                                <Button href="teste2" className={classes.button}>
+                                    Alterar
+                                </Button>
+                                <Button href="teste3" className={classes.button}>
+                                    Delete
+                                </Button>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

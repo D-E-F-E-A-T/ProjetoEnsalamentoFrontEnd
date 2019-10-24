@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import api from '../../../utils/API';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -14,9 +14,9 @@ const initialState = {
 export default function CreateBuilding(props) {
   const [state, setState] = useState(initialState);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, []);
+  // }, []);
 
   const handleInputChange = event => {
     const target = event.target;
