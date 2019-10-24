@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Title from '../../../components/Navigation/Title';
 import api from '../../../utils/API';
+
+const useStyles = () => ({
+    root: {
+      width: '100%',
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 650,
+    },
+  });
 
 export default class MainUsuario extends Component {
     state = {
@@ -17,41 +33,32 @@ export default class MainUsuario extends Component {
     }
 
     render() {
+        const classes = useStyles();
         const { building } = this.state;
-        return building.map((building, index) => (
-
-            <div key={index} className="usuario-info">
-                <div className="card mb-4">
-                    <h5 className="card-header">{building.name}</h5>
-                    <div className="card-body">
-                        <div className="media">
-                            <div className="media-body">
-                                <p>{building.name}</p>
-                            </div>
-                        </div>
-                        <div className="text-right">
-                            <Link
-                                to={`/building/details/${building.id}`}
-                                className="btn btn-success mr-3"
-                                role="button" >
-                                Detalhes
-                            </Link>
-                            <Link
-                                to={`/deletarUsuario/${building.id}`}
-                                className="btn btn-danger mr-3"
-                                role="button">
-                                Remover
-                            </Link>
-                            <Link
-                                to={`/editarUsuario/${building.id}`}
-                                className="btn btn-primary"
-                                role="button">
-                                Editar
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ))
+        return (
+            <Paper className={classes.root}>
+                <Title>Prédios</Title>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Nome</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell align="center">Ações</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {building.map((building, index) => (
+                            <TableRow key={index}>
+                                <TableCell component="th" scope="row">
+                                    {building.name}
+                                </TableCell>
+                                <TableCell>{building.status}</TableCell>
+                                <TableCell align="center">Botões</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Paper>
+        )
     };
 }

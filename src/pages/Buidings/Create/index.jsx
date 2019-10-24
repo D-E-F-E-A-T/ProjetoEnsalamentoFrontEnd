@@ -36,7 +36,7 @@ class CreateBuilding extends Component {
       return <Redirect to="/" />;
     } else {
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={(e) => {this.handleSubmit(); e.preventDefault();}}>
           {this.exibeErro()}
 
           <fieldset>
@@ -89,7 +89,12 @@ class CreateBuilding extends Component {
   };
 
   handleSubmit = async() => {
-    const { data: post } = await api.post('/buildings', this.state.building);
+    api.post('/buildings', this.state.building)
+      .then(res => {
+        this.props.history.push('/buildings')
+        console.log(res);
+        console.log(res.data);
+      })
   }
 }
 
