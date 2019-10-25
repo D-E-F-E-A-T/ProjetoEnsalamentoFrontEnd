@@ -12,23 +12,51 @@ const initialState = {
     erro: null
 }
 
-export default function BuildingDetails() {
+export default function BuildingDetails(props) {
     const [state, setState] = useState(initialState);
-    const { id } = this.props.match.params;
+    const { id } = props.match.params;
 
     useEffect(() => {
         async function getBuilding() {
             const response = await api.get(`/Buildings/${id}`);
-
+            console.log(response)
             setState({ building: response.data });
         }
 
         getBuilding();
-    }, []);
+    }, [id]);
+
+    const handleInputChange = event => {
+      const target = event.target;
+      const name = target.name;
+      const value = target.value;
+  
+      setState(prevState => ({
+        building: { ...prevState.building, [name]: value }
+      }));
+    }
+
+    const handleChangeCheckbox = event => {
+      const name = event.target.name;
+      console.log(event)
+      setState(prevState => ({
+        building: { ...prevState.building, [name]: event.target.checked }
+      }));
+    };
+
+    const handleSubmit = async () => {
+      api.put('/buildings/' + id, state.building)
+        .then(res => {
+          
+          props.history.push('/buildings')
+          console.log(res);
+          console.log(res.data);
+        })
+    }
 
     return (
-        <form /*onSubmit={handleSubmit}*/>
-    
+        <form onSubmit={(e) => {handleSubmit(); e.preventDefault();}}>
+          {console.log("Joça não funciouna")}
           <fieldset>
             <legend>Create Building </legend>
             <div className="form-group">
@@ -37,10 +65,11 @@ export default function BuildingDetails() {
                 type="text"
                 className="form-control"
                 placeholder="name"
+                name="name"
                 minLength="2"
                 maxLength="40"
-                // value={state.building.name}
-                // onChange={handleInputChange}
+                value={state.building.name}
+                onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
@@ -50,9 +79,9 @@ export default function BuildingDetails() {
                   'aria-label': 'primary checkbox',
                 }}
                 name="status"
-                // value={state.building.status}
-                // checked={state.building.status === true}
-                // onChange={handleChangeCheckbox}
+                value={state.building.status}
+                checked={state.building.status === true}
+                onChange={handleChangeCheckbox}
               />
             </div>
     

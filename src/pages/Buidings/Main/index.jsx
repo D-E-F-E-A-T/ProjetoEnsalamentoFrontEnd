@@ -68,10 +68,10 @@ export default function MainUsuario() {
                                 <Button href={"building/details/" + building.id} className={classes.button}>
                                     Detalhes
                                 </Button>
-                                <Button href="teste2" className={classes.button}>
+                                <Button href={"building/update/" + building.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <Button href="teste3" className={classes.button}>
+                                <Button href={"building/delete/" + building.id} className={classes.button}>
                                     Delete
                                 </Button>
                             </TableCell>
