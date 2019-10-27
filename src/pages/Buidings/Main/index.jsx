@@ -49,6 +49,9 @@ export default function MainUsuario() {
     return (
         <Paper className={classes.root}>
             <Title>Prédios</Title>
+            <Button href={"building/create"} className={classes.button} color="primary" variant="contained">
+                Criar Prédio
+            </Button>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
