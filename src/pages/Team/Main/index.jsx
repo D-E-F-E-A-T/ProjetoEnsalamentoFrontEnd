@@ -48,7 +48,7 @@ export default function MainUsuario() {
 
     return (
         <Paper className={classes.root}>
-            <Title>Prédios</Title>
+            <Title>Turmas</Title>
             <Button href={"team/create"} className={classes.button} color="primary" variant="contained">
                 Criar Turma
             </Button>

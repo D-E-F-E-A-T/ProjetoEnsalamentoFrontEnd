@@ -15,6 +15,10 @@ import MainTeams from './pages/Team/Main';
 import CreateTeam from './pages/Team/Create';
 import UpdateTeam from './pages/Team/Update';
 
+import MainCourses from './pages/Course/Main';
+import CreateCourse from './pages/Course/Create';
+import UpdateCourse from './pages/Course/Update';
+
 const Routes = () => (
     
     <BrowserRouter>
@@ -32,6 +36,10 @@ const Routes = () => (
             <Route path = "/teams" component={MainTeams} />
             <Route path = "/team/create" component={CreateTeam} />
             <Route path = "/team/update/:id" component={UpdateTeam} />
+
+            <Route path = "/courses" component={MainCourses} />
+            <Route path = "/course/create" component={CreateCourse} />
+            <Route path = "/course/update/:id" component={UpdateCourse} />
         </Switch>
     </BrowserRouter>
 )
