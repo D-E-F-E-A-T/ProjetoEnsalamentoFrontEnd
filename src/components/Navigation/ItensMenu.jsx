@@ -12,63 +12,74 @@ import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SchoolIcon from '@material-ui/icons/School';
-
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-  }
+import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <List>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Inicio" />
-    </ListItem>
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/teams">
+      <ListItem button>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Inicio" />
+      </ListItem>
+    </Link>
 
-    <ListItemLink href="loadHourlies">
-      <ListItemIcon>
-        <AccessTimeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Carga Horaria" />
-    </ListItemLink>
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/loadHourlies">
+      <ListItem button>
+        <ListItemIcon>
+          <AccessTimeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Carga Horaria" />
+      </ListItem>
+    </Link>
 
-    <ListItemLink href="courses">
-      <ListItemIcon>
-        <SchoolIcon />
-      </ListItemIcon>
-      <ListItemText primary="Cursos" />
-    </ListItemLink>
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/courses">
+      <ListItem button>
+        <ListItemIcon>
+          <SchoolIcon />
+        </ListItemIcon>
+        <ListItemText primary="Cursos" />
+      </ListItem>
+    </Link>
 
-    <ListItemLink href="disciplines">
-      <ListItemIcon>
-        <ClassIcon />
-      </ListItemIcon>
-      <ListItemText primary="Disciplinas" />
-    </ListItemLink>
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/disciplines">
+      <ListItem button>
+        <ListItemIcon>
+          <ClassIcon />
+        </ListItemIcon>
+        <ListItemText primary="Disciplinas" />
+      </ListItem>
+    </Link>
 
-    <ListItemLink href="buildings">
-      <ListItemIcon>
-        <ApartmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Prédios" />
-    </ListItemLink>
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/buildings">
+      <ListItem button>
+        <ListItemIcon>
+          <ApartmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Prédios" />
+      </ListItem>
+    </Link>
 
-    <ListItemLink href="rooms">
-      <ListItemIcon>
-        <MeetingRoomIcon />
-      </ListItemIcon>
-      <ListItemText primary="Salas" />
-    </ListItemLink>
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/rooms">
+      <ListItem button>
+        <ListItemIcon>
+          <MeetingRoomIcon />
+        </ListItemIcon>
+        <ListItemText primary="Salas" />
+      </ListItem>
+    </Link>
 
-    <ListItemLink href="teams">
-      <ListItemIcon>
-        <GroupIcon />
-      </ListItemIcon>
-      <ListItemText primary="Turmas" />
-    </ListItemLink>
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/teams">
+      <ListItem button>
+        <ListItemIcon>
+          <GroupIcon />
+        </ListItemIcon>
+        <ListItemText primary="Turmas" />
+      </ListItem>
+    </Link>
   </List>
-  
+
 );
 
 export const secondaryListItems = (

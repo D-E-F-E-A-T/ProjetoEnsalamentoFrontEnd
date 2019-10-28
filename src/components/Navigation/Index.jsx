@@ -16,6 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from './ItensMenu';
 import Routes from '../../routes'
+import { BrowserRouter } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -122,6 +123,8 @@ export default function Dashboard() {
   };
 
   return (
+    
+    <BrowserRouter>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -167,5 +170,6 @@ export default function Dashboard() {
         <Copyright />
       </main>
     </div>
+    </BrowserRouter>
   );
 }
