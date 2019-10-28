@@ -44,19 +44,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function BuildingDetails(props) {
+export default function UpdateLoadHourly(props) {
     const [state, setState] = useState(initialState);
     const { id } = props.match.params;
     const classes = useStyles();
 
     useEffect(() => {
-        async function getBuilding() {
+        async function getLoadHourly() {
             const response = await api.get(`/loadhourlies/${id}`);
             console.log(response)
             setState({ loadHourly: response.data });
         }
 
-        getBuilding();
+        getLoadHourly();
     }, [id]);
 
     const handleInputChange = event => {

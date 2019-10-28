@@ -31,19 +31,19 @@ const initialState = {
     erro: null
 }
 
-export default function MainUsuario() {
+export default function MainLoadHourly() {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { loadHourlies } = state;
 
     useEffect(() => {
-        async function getBuildings() {
+        async function getLoadHourlies() {
             const response = await api.get(`/loadhourlies`);
 
             setState({ loadHourlies: response.data });
         }
 
-        getBuildings();
+        getLoadHourlies();
     }, []);
 
     return (

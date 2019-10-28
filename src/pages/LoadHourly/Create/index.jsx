@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CreateBuilding(props) {
+export default function CreateLoadHourly(props) {
   const [state, setState] = useState(initialState);
 
   const classes = useStyles();

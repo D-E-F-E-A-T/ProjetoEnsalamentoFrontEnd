@@ -44,19 +44,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function BuildingDetails(props) {
+export default function UpdateCourse(props) {
     const [state, setState] = useState(initialState);
     const { id } = props.match.params;
     const classes = useStyles();
 
     useEffect(() => {
-        async function getBuilding() {
+        async function getCourse() {
             const response = await api.get(`/courses/${id}`);
             console.log(response)
             setState({ course: response.data });
         }
 
-        getBuilding();
+        getCourse();
     }, [id]);
 
     const handleInputChange = event => {

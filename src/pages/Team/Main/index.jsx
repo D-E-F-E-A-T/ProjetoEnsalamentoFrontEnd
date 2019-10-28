@@ -31,19 +31,19 @@ const initialState = {
     erro: null
 }
 
-export default function MainUsuario() {
+export default function MainTeam() {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { teams } = state;
 
     useEffect(() => {
-        async function getBuildings() {
+        async function getTeams() {
             const response = await api.get(`/teams`);
 
             setState({ teams: response.data });
         }
 
-        getBuildings();
+        getTeams();
     }, []);
 
     return (

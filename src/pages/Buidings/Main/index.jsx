@@ -31,7 +31,7 @@ const initialState = {
     erro: null
 }
 
-export default function MainUsuario() {
+export default function MainBuildings() {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { building } = state;

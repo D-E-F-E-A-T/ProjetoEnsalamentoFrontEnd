@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CreateBuilding(props) {
+export default function CreateTeam(props) {
   const [state, setState] = useState(initialState);
 
   const classes = useStyles();

@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function BuildingDetails(props) {
+export default function UpdateBuilding(props) {
     const [state, setState] = useState(initialState);
     const { id } = props.match.params;
     const classes = useStyles();

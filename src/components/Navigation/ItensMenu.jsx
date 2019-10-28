@@ -11,6 +11,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import SchoolIcon from '@material-ui/icons/School';
 
 function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
@@ -34,9 +35,16 @@ export const mainListItems = (
 
     <ListItemLink href="courses">
       <ListItemIcon>
-        <ClassIcon />
+        <SchoolIcon />
       </ListItemIcon>
       <ListItemText primary="Cursos" />
+    </ListItemLink>
+
+    <ListItemLink href="disciplines">
+      <ListItemIcon>
+        <ClassIcon />
+      </ListItemIcon>
+      <ListItemText primary="Disciplinas" />
     </ListItemLink>
 
     <ListItemLink href="buildings">

@@ -31,19 +31,19 @@ const initialState = {
     erro: null
 }
 
-export default function MainUsuario() {
+export default function MainCourse() {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { courses } = state;
 
     useEffect(() => {
-        async function getBuildings() {
+        async function getCourses() {
             const response = await api.get(`/courses`);
 
             setState({ courses: response.data });
         }
 
-        getBuildings();
+        getCourses();
     }, []);
 
     return (

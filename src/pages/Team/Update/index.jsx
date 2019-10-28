@@ -50,13 +50,13 @@ export default function BuildingDetails(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        async function getBuilding() {
+        async function getTeam() {
             const response = await api.get(`/Teams/${id}`);
             console.log(response)
             setState({ team: response.data });
         }
 
-        getBuilding();
+        getTeam();
     }, [id]);
 
     const handleInputChange = event => {

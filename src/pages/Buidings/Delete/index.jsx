@@ -16,7 +16,7 @@ const initialState = {
     }
 }
 
-export default function DeletarFuncionario(props) {
+export default function DeleteBuilding(props) {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { id } = props.match.params;
