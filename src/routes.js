@@ -23,6 +23,10 @@ import MainLoadHourlies from './pages/LoadHourly/Main';
 import CreateLoadHourly from './pages/LoadHourly/Create';
 import UpdateLoadHourly from './pages/LoadHourly/Update';
 
+import MainDisciplines from './pages/Discipline/Main';
+import CreateDiscipline from './pages/Discipline/Create';
+import UpdateDiscipline from './pages/Discipline/Update';
+
 const Routes = () => (
     
     <BrowserRouter>
@@ -48,6 +52,10 @@ const Routes = () => (
             <Route path = "/loadHourlies" component={MainLoadHourlies} />
             <Route path = "/loadHourly/create" component={CreateLoadHourly} />
             <Route path = "/loadHourly/update/:id" component={UpdateLoadHourly} />
+
+            <Route path = "/disciplines" component={MainDisciplines} />
+            <Route path = "/discipline/create" component={CreateDiscipline} />
+            <Route path = "/discipline/update/:id" component={UpdateDiscipline} />
         </Switch>
     </BrowserRouter>
 )
