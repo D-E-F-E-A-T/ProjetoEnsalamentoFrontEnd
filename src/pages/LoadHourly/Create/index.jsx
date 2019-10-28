@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import api from '../../../utils/API';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,11 +11,10 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const initialState = {
-  room: {
-    name: "",
-    maxCapacity : 0,
-    building_id: 0,
-    status: true,
+  loadHourly: {
+    description: "",
+    value: 0,
+    status: true
   },
   erro: null
 }
@@ -43,86 +42,49 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  menu: {
-    width: 200,
-  },
 }));
 
-const buildings = [
-  {
-    key: 0
-  }
-]
-
-export default function CreateRoom(props) {
+export default function CreateBuilding(props) {
   const [state, setState] = useState(initialState);
+
   const classes = useStyles();
-  const { id } = props.match.params;
 
-  useEffect(() => {
-    async function getBuilding() {
-        const response = await api.get(`/Buildings`);
-
-        response.data.forEach( dado => {
-          let option = {
-            value : dado.id,
-            label : dado.name
-          }
-          buildings.push(option)
-        })
-        setState({ building: buildings,
-          room: initialState.room });
-    }
-
-    async function getRoom() {
-      const response = await api.get(`/rooms/${id}`);
-      setState({ room: response.data });
-    }
-
-    getRoom();
-    getBuilding();
-  }, [id]);
 
   const handleInputChange = event => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
+
     setState(prevState => ({
-      room: { ...prevState.room, [name]: value }
+      loadHourly: { ...prevState.loadHourly, [name]: value }
     }));
   }
 
   const handleChangeCheckbox = event => {
     const name = event.target.name;
-    event.persist();
+    console.log(event)
     setState(prevState => ({
-      room: { ...prevState.room, [name]: event.target.checked }
-    }));
-  };
-
-  const handleChangeSelect = event => {
-    const name = event.target.name;
-    event.persist();
-    setState(prevState => ({
-      room: { ...prevState.room, [name]: event.target.value }
+      loadHourly: { ...prevState.loadHourly, [name]: event.target.checked }
     }));
   };
 
   const handleSubmit = async () => {
-    api.put('/rooms/' + id, state.room)
+    api.post('/loadhourlies', state.loadHourly)
       .then(res => {
-        props.history.push('/rooms')
+        props.history.push('/loadhourlies')
+        console.log(res);
+        console.log(res.data);
       })
   }
 
   return (
-    <Container component="main" maxWidth="xs" className={classes.root}>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
 
       <Typography component="h1" variant="h5">
-        Criar Sala
+        Criar Carga Horária
       </Typography>
-      <form onSubmit={(e) => {handleSubmit(); e.preventDefault();}}>
+      <form onSubmit={(e) => {handleSubmit(); e.preventDefault();}} className={classes.form}>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
@@ -130,9 +92,9 @@ export default function CreateRoom(props) {
               variant="outlined"
               required
               fullWidth
-              name="name"
-              label="Nome da Sala"
-              value={state.room.name} 
+              label="Descrição da Carga Horária"
+              name="description"
+              value={state.loadHourly.description}
               onChange={handleInputChange}
             />
           </Grid>
@@ -142,8 +104,8 @@ export default function CreateRoom(props) {
           <Grid item xs={12} sm={12}>
             <TextField
               id="outlined-number"
-              label="Capaxidade Máxima"
-              value={state.room.maxCapacity}
+              label="Valor"
+              value={state.loadHourly.value}
               onChange={handleInputChange}
               type="number"
               className={classes.textField}
@@ -151,40 +113,10 @@ export default function CreateRoom(props) {
                 shrink: true,
               }}
               fullWidth
-              name="maxCapacity"
+              name="value"
               margin="normal"
               variant="outlined"
             />
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={12}>
-            <TextField
-              id="outlined-select-currency-native"
-              select
-              fullWidth
-              label="Prédio"
-              name="building_id"
-              className={classes.textField}
-              value={state.room.building_id}
-              onChange={handleChangeSelect}
-              SelectProps={{
-                native: true,
-                MenuProps: {
-                  className: classes.menu,
-                },
-              }}
-              helperText="Por Favor, seleciona o respectivo prédio"
-              margin="normal"
-              variant="outlined"
-              >
-                {buildings.map(option => (
-                  <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
           </Grid>
         </Grid>
 
@@ -196,12 +128,13 @@ export default function CreateRoom(props) {
               }}
               color="primary"
               name="status"
-              value={state.room.status}
-              checked={state.room.status === true}
+              value={state.loadHourly.status}
+              checked={state.loadHourly.status === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.room.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.loadHourly.status === true ? "Ativo" : "Inativo") + ")"}
           />
+          
         </Grid>
 
         <Button 
@@ -210,7 +143,7 @@ export default function CreateRoom(props) {
           variant="contained"
           color="primary"
           className={classes.submit}>
-          Alterar
+          Cadastrar
         </Button>
       </form>
     </Container>

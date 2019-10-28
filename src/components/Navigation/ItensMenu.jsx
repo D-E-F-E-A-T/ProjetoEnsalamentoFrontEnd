@@ -10,6 +10,7 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
@@ -23,6 +24,13 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Inicio" />
     </ListItem>
+
+    <ListItemLink href="loadHourlies">
+      <ListItemIcon>
+        <AccessTimeIcon />
+      </ListItemIcon>
+      <ListItemText primary="Carga Horaria" />
+    </ListItemLink>
 
     <ListItemLink href="courses">
       <ListItemIcon>

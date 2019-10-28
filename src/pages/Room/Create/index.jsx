@@ -48,28 +48,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const buildings = [
-  {
-    key: 0
-  }
-]
+
 
 export default function CreateRoom(props) {
   const [state, setState] = useState(initialState);
+  const [buildings, setBuildings] = useState([])
   const classes = useStyles();
 
   useEffect(() => {
     async function getBuildings() {
         const response = await api.get(`/Buildings`);
+        let buildingOptions = [{ key: 0}];
 
-        response.data.map( dado => {
+        response.data.forEach( dado => {
           let option = {
             value : dado.id,
             label : dado.name
           }
-          buildings.push(option)
+          buildingOptions.push(option)
         })
-        setState({ building: buildings });
+        setBuildings(buildingOptions)
     }
   
     getBuildings();
@@ -172,8 +170,8 @@ export default function CreateRoom(props) {
               margin="normal"
               variant="outlined"
               >
-                {buildings.map(option => (
-                  <option key={option.value} value={option.value}>
+                {buildings.map((option, index) => (
+                  <option key={index} value={option.value}>
                   {option.label}
                 </option>
               ))}
