@@ -27,20 +27,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const initialState = {
-    room: [],
+    teams: [],
     erro: null
 }
 
 export default function MainUsuario() {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
-    const { room } = state;
+    const { teams } = state;
 
     useEffect(() => {
         async function getBuildings() {
-            const response = await api.get(`/Rooms`);
+            const response = await api.get(`/teams`);
 
-            setState({ room: response.data });
+            setState({ teams: response.data });
         }
 
         getBuildings();
@@ -49,40 +49,32 @@ export default function MainUsuario() {
     return (
         <Paper className={classes.root}>
             <Title>Prédios</Title>
-            <Button href={"room/create"} className={classes.button} color="primary" variant="contained">
-                Criar Sala
+            <Button href={"team/create"} className={classes.button} color="primary" variant="contained">
+                Criar Turma
             </Button>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         <TableCell>Nome</TableCell>
-                        <TableCell>Prédio</TableCell>
-                        <TableCell>Capacidade Máxima</TableCell>
                         <TableCell>Status</TableCell>
                         <TableCell align="center">Ações</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {room.map((room, index) => (
+                    {teams.map((team, index) => (
                         <TableRow key={index}>
                             <TableCell component="th" scope="row">
-                                {room.name}
+                                {team.name}
                             </TableCell>
-                            <TableCell component="th" scope="row">
-                                {room.building.name}
-                            </TableCell>
-                            <TableCell component="th" scope="row" align="center">
-                                {room.maxCapacity}
-                            </TableCell>
-                            <TableCell>{room.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{team.status ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell align="center">
-                                <Button href={"room/details/" + room.id} className={classes.button}>
+                                <Button href={"team/details/" + team.id} className={classes.button}>
                                     Detalhes
                                 </Button>
-                                <Button href={"room/update/" + room.id} className={classes.button}>
+                                <Button href={"team/update/" + team.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <Button href={"room/delete/" + room.id} className={classes.button}>
+                                <Button href={"team/delete/" + team.id} className={classes.button}>
                                     Delete
                                 </Button>
                             </TableCell>

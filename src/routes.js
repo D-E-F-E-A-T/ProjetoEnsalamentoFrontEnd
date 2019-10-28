@@ -6,8 +6,14 @@ import DetailsBuilding from './pages/Buidings/Details';
 import CreateBuilding from './pages/Buidings/Create';
 import UpdateBuilding from './pages/Buidings/Update';
 import DeleteBuilding from './pages/Buidings/Delete';
+
 import MainRooms from './pages/Room/Main';
 import CreateRoom from './pages/Room/Create';
+import UpdateRoom from './pages/Room/Update';
+
+import MainTeams from './pages/Team/Main';
+import CreateTeam from './pages/Team/Create';
+import UpdateTeam from './pages/Team/Update';
 
 const Routes = () => (
     
@@ -21,7 +27,11 @@ const Routes = () => (
 
             <Route path = "/rooms" component={MainRooms} />
             <Route path = "/room/create" component={CreateRoom} />
+            <Route path = "/room/update/:id" component={UpdateRoom} />
 
+            <Route path = "/teams" component={MainTeams} />
+            <Route path = "/team/create" component={CreateTeam} />
+            <Route path = "/team/update/:id" component={UpdateTeam} />
         </Switch>
     </BrowserRouter>
 )

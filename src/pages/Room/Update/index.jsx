@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import api from '../../../utils/API';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,12 +11,13 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const initialState = {
-    building: {
-        id: 0,
-        name: "",
-        status: true
-    },
-    erro: null
+  room: {
+    name: "",
+    maxCapacity : 0,
+    building_id: 0,
+    status: true,
+  },
+  erro: null
 }
 
 const useStyles = makeStyles(theme => ({
@@ -42,59 +43,86 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  menu: {
+    width: 200,
+  },
 }));
 
-export default function BuildingDetails(props) {
-    const [state, setState] = useState(initialState);
-    const { id } = props.match.params;
-    const classes = useStyles();
+const buildings = [
+  {
+    key: 0
+  }
+]
 
-    useEffect(() => {
-        async function getBuilding() {
-            const response = await api.get(`/Buildings/${id}`);
-            console.log(response)
-            setState({ building: response.data });
-        }
+export default function CreateRoom(props) {
+  const [state, setState] = useState(initialState);
+  const classes = useStyles();
+  const { id } = props.match.params;
 
-        getBuilding();
-    }, [id]);
+  useEffect(() => {
+    async function getBuilding() {
+        const response = await api.get(`/Buildings`);
 
-    const handleInputChange = event => {
-      const target = event.target;
-      const name = target.name;
-      const value = target.value;
-  
-      setState(prevState => ({
-        building: { ...prevState.building, [name]: value }
-      }));
-    }
-
-    const handleChangeCheckbox = event => {
-      const name = event.target.name;
-      console.log(event)
-      setState(prevState => ({
-        building: { ...prevState.building, [name]: event.target.checked }
-      }));
-    };
-
-    const handleSubmit = async () => {
-      api.put('/buildings/' + id, state.building)
-        .then(res => {
-          
-          props.history.push('/buildings')
-          console.log(res);
-          console.log(res.data);
+        response.data.map( dado => {
+          let option = {
+            value : dado.id,
+            label : dado.name
+          }
+          buildings.push(option)
         })
+        setState({ building: buildings,
+          room: initialState.room });
     }
 
-    return (
-      <Container component="main" maxWidth="xs">
+    async function getRoom() {
+      const response = await api.get(`/rooms/${id}`);
+      setState({ room: response.data });
+    }
+
+    getRoom();
+    getBuilding();
+  }, []);
+
+  const handleInputChange = event => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setState(prevState => ({
+      room: { ...prevState.room, [name]: value }
+    }));
+  }
+
+  const handleChangeCheckbox = event => {
+    const name = event.target.name;
+    event.persist();
+    setState(prevState => ({
+      room: { ...prevState.room, [name]: event.target.checked }
+    }));
+  };
+
+  const handleChangeSelect = event => {
+    const name = event.target.name;
+    event.persist();
+    setState(prevState => ({
+      room: { ...prevState.room, [name]: event.target.value }
+    }));
+  };
+
+  const handleSubmit = async () => {
+    api.put('/rooms/' + id, state.room)
+      .then(res => {
+        props.history.push('/rooms')
+      })
+  }
+
+  return (
+    <Container component="main" maxWidth="xs" className={classes.root}>
       <CssBaseline />
 
       <Typography component="h1" variant="h5">
-        Criar Prédio
+        Criar Sala
       </Typography>
-      <form onSubmit={handleSubmit} className={classes.form}>
+      <form onSubmit={(e) => {handleSubmit(); e.preventDefault();}}>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
@@ -102,12 +130,64 @@ export default function BuildingDetails(props) {
               variant="outlined"
               required
               fullWidth
-              label="Nome do Prédio"
-              value={state.building.name}
+              name="name"
+              label="Nome da Sala"
+              value={state.room.name} 
               onChange={handleInputChange}
             />
           </Grid>
         </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              id="outlined-number"
+              label="Capaxidade Máxima"
+              value={state.room.maxCapacity}
+              onChange={handleInputChange}
+              type="number"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              fullWidth
+              name="maxCapacity"
+              margin="normal"
+              variant="outlined"
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              id="outlined-select-currency-native"
+              select
+              fullWidth
+              label="Prédio"
+              name="building_id"
+              className={classes.textField}
+              value={state.room.building_id}
+              onChange={handleChangeSelect}
+              SelectProps={{
+                native: true,
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              helperText="Por Favor, seleciona o respectivo prédio"
+              margin="normal"
+              variant="outlined"
+              >
+                {buildings.map(option => (
+                  <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Grid>
+        </Grid>
+
         <Grid item xs={12}>
         <FormControlLabel
           control = {<Checkbox
@@ -116,13 +196,12 @@ export default function BuildingDetails(props) {
               }}
               color="primary"
               name="status"
-              value={state.building.status}
-              checked={state.building.status === true}
+              value={state.room.status}
+              checked={state.room.status === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.building.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.room.status === true ? "Ativo" : "Inativo") + ")"}
           />
-          
         </Grid>
 
         <Button 
@@ -135,5 +214,6 @@ export default function BuildingDetails(props) {
         </Button>
       </form>
     </Container>
-      );
-}
+  );
+
+};

@@ -59,7 +59,7 @@ export default function CreateRoom(props) {
   const classes = useStyles();
 
   useEffect(() => {
-    async function getBuilding() {
+    async function getBuildings() {
         const response = await api.get(`/Buildings`);
 
         response.data.map( dado => {
@@ -69,11 +69,10 @@ export default function CreateRoom(props) {
           }
           buildings.push(option)
         })
-        setState({ building: buildings,
-          room: initialState.room });
+        setState({ building: buildings });
     }
-
-    getBuilding();
+  
+    getBuildings();
   }, []);
 
   const handleInputChange = event => {
