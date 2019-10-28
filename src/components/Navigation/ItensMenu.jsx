@@ -27,7 +27,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Prédios" />
     </ListItemLink>
-    <ListItemLink href="buildings">
+    <ListItemLink href="rooms">
       <ListItemIcon>
         <MeetingRoomIcon />
       </ListItemIcon>
