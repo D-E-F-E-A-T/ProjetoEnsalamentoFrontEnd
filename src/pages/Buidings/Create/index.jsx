@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from '../../../utils/API';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -15,7 +15,7 @@ const initialState = {
     name: "",
     status: true
   },
-  erro: null
+  errors: []
 }
 
 const useStyles = makeStyles(theme => ({
@@ -45,8 +45,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function CreateBuilding(props) {
   const [state, setState] = useState(initialState);
+  //const [errors, setErrors] = useState([{}]);
 
   const classes = useStyles();
+
+  useEffect(() => {
+    console.warn('state', state.errors)
+  }, [state.errors])
 
 
   const handleInputChange = event => {
@@ -67,13 +72,20 @@ export default function CreateBuilding(props) {
     }));
   };
 
-  const handleSubmit = async () => {
-    api.post('/buildings', state.building)
-      .then(res => {
-        props.history.push('/buildings')
-        console.log(res);
-        console.log(res.data);
-      })
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await api.post('/buildings', state.building);
+      props.history.push('/buildings')
+      console.log(res);
+      console.log(res.data);
+
+    } catch (err) {
+      console.log(err.response.data.errors)
+      let errors = err.response.data.errors
+      setState(prevState => ({ ...prevState, errors }));
+    }
+
   }
 
   return (
@@ -83,23 +95,27 @@ export default function CreateBuilding(props) {
       <Typography component="h1" variant="h5">
         Criar Prédio
       </Typography>
-      <form onSubmit={handleSubmit} className={classes.form}>
+      <form className={classes.form}>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <TextField
+              error={!!state.errors && !!state.errors[0]}
               variant="outlined"
-              required
+              //required
               fullWidth
+              name="name"
+              helperText={!!state.errors && !!state.errors[0] ? state.errors[0].message : null}
               label="Nome do Prédio"
               value={state.building.name}
               onChange={handleInputChange}
             />
+
           </Grid>
         </Grid>
         <Grid item xs={12}>
-        <FormControlLabel
-          control = {<Checkbox
+          <FormControlLabel
+            control={<Checkbox
               inputProps={{
                 'aria-label': 'primary checkbox',
               }}
@@ -111,15 +127,16 @@ export default function CreateBuilding(props) {
             />}
             label={"Status (" + (state.building.status === true ? "Ativo" : "Inativo") + ")"}
           />
-          
+
         </Grid>
 
-        <Button 
+        <Button
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
-          className={classes.submit}>
+          className={classes.submit}
+          onClick={handleSubmit} >
           Cadastrar
         </Button>
       </form>
