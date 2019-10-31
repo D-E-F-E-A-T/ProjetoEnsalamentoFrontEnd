@@ -75,6 +75,7 @@ export default function CreateLoadHourly(props) {
         console.log(res);
         console.log(res.data);
       })
+      .catch(err => alert(err.response.data.errors))
   }
 
   return (
@@ -89,6 +90,7 @@ export default function CreateLoadHourly(props) {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <TextField
+              helperText="Campo obrigatório"
               variant="outlined"
               required
               fullWidth
