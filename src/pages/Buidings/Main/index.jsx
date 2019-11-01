@@ -9,6 +9,7 @@ import Title from '../../../components/Navigation/Title';
 import Button from '@material-ui/core/Button';
 import api from '../../../utils/API';
 import { makeStyles } from '@material-ui/core';
+import ComponentDelete from '../../../components/Dialogs/DialogDelete'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +32,7 @@ const initialState = {
     erro: null
 }
 
-export default function MainBuildings() {
+export default function MainBuildings(props) {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { building } = state;
@@ -74,9 +75,7 @@ export default function MainBuildings() {
                                 <Button href={"building/update/" + building.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <Button href={"building/delete/" + building.id} className={classes.button}>
-                                    Delete
-                                </Button>
+                                <ComponentDelete setStateBuildings={setState} history={props.history} deletePath={"buildings/" + building.id}/>
                             </TableCell>
                         </TableRow>
                     ))}
