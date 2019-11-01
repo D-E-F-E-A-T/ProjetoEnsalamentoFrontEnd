@@ -79,7 +79,12 @@ export default function MainRooms(props) {
                                 <Button href={"discipline/update/" + discipline.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <ComponentDelete setState={setState} history={props.history} deletePath={"disciplines/" + discipline.id}/>
+                                <ComponentDelete 
+                                    nameState="disciplines" 
+                                    getRoute="/disciplines" 
+                                    setState={setState} 
+                                    history={props.history} 
+                                    deletePath={"disciplines/" + discipline.id}/>
                             </TableCell>
                         </TableRow>
                     ))}

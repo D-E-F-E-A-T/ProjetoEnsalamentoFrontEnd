@@ -24,6 +24,7 @@ export default function SimplePopover(props) {
       if(responseDelete.status){
         const responseGet = await api.get(props.getRoute);
         props.setState({[props.nameState]: responseGet.data});
+        setAnchorEl(null);
       }
       else{
         console.log(responseDelete)

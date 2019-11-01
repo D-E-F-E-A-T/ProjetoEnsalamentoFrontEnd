@@ -79,7 +79,12 @@ export default function MainLoadHourly(props) {
                                 <Button href={"loadHourly/update/" + loadHourly.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <ComponentDelete setState={setState} history={props.history} deletePath={"loadhourlies/" + loadHourly.id}/>
+                                <ComponentDelete 
+                                    nameState="loadHourlies" 
+                                    getRoute="/loadhourlies" 
+                                    setState={setState} 
+                                    history={props.history} 
+                                    deletePath={"loadhourlies/" + loadHourly.id}/>
                             </TableCell>
                         </TableRow>
                     ))}

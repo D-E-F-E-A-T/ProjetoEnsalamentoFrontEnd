@@ -75,7 +75,12 @@ export default function MainTeam(props) {
                                 <Button href={"team/update/" + team.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <ComponentDelete setState={setState} history={props.history} deletePath={"teams/" + team.id}/>
+                                <ComponentDelete 
+                                    nameState="teams" 
+                                    getRoute="/Teams" 
+                                    setState={setState} 
+                                    history={props.history} 
+                                    deletePath={"teams/" + team.id}/>
                             </TableCell>
                         </TableRow>
                     ))}
