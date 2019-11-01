@@ -9,6 +9,7 @@ import Title from '../../../components/Navigation/Title';
 import Button from '@material-ui/core/Button';
 import api from '../../../utils/API';
 import { makeStyles } from '@material-ui/core';
+import ComponentDelete from '../../../components/Dialogs/DialogDelete'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +32,7 @@ const initialState = {
     erro: null
 }
 
-export default function MainLoadHourly() {
+export default function MainLoadHourly(props) {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { loadHourlies } = state;
@@ -78,9 +79,7 @@ export default function MainLoadHourly() {
                                 <Button href={"loadHourly/update/" + loadHourly.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <Button href={"loadHourly/delete/" + loadHourly.id} className={classes.button}>
-                                    Delete
-                                </Button>
+                                <ComponentDelete setState={setState} history={props.history} deletePath={"loadhourlies/" + loadHourly.id}/>
                             </TableCell>
                         </TableRow>
                     ))}

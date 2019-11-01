@@ -75,7 +75,12 @@ export default function MainBuildings(props) {
                                 <Button href={"building/update/" + building.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <ComponentDelete setStateBuildings={setState} history={props.history} deletePath={"buildings/" + building.id}/>
+                                <ComponentDelete 
+                                    nameState="building" 
+                                    getRoute="/Buildings" 
+                                    setState={setState} 
+                                    history={props.history} 
+                                    deletePath={"buildings/" + building.id}/>
                             </TableCell>
                         </TableRow>
                     ))}

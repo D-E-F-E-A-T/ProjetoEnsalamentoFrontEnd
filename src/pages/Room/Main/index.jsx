@@ -9,6 +9,7 @@ import Title from '../../../components/Navigation/Title';
 import Button from '@material-ui/core/Button';
 import api from '../../../utils/API';
 import { makeStyles } from '@material-ui/core';
+import ComponentDelete from '../../../components/Dialogs/DialogDelete'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +32,7 @@ const initialState = {
     erro: null
 }
 
-export default function MainRooms() {
+export default function MainRooms(props) {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { room } = state;
@@ -82,9 +83,12 @@ export default function MainRooms() {
                                 <Button href={"room/update/" + room.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <Button href={"room/delete/" + room.id} className={classes.button}>
-                                    Delete
-                                </Button>
+                                <ComponentDelete 
+                                    nameState="room" 
+                                    getRoute="/Rooms" 
+                                    setState={setState} 
+                                    history={props.history} 
+                                    deletePath={"rooms/" + room.id}/>
                             </TableCell>
                         </TableRow>
                     ))}

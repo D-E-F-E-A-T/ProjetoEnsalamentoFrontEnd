@@ -17,18 +17,20 @@ export default function SimplePopover(props) {
   };
 
   const confirmDelete = async () => {
-    api.delete(props.deletePath)
-    .then(res => {
-        
-      //props.history.push('/buildings')
-      console.log(res);
-      console.log(res.data);
-      api.get(`/Buildings`)
-        .then(response => {
-            props.setStateBuildings({building: response.data})
-            setAnchorEl(null);
-        })
-    })
+
+    async function actionDelete() {
+      const responseDelete = await api.delete(props.deletePath);
+
+      if(responseDelete.status){
+        const responseGet = await api.get(props.getRoute);
+        props.setState({[props.nameState]: responseGet.data});
+      }
+      else{
+        console.log(responseDelete)
+      }
+    }
+
+    actionDelete();
   }
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;

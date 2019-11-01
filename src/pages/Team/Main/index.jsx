@@ -9,6 +9,7 @@ import Title from '../../../components/Navigation/Title';
 import Button from '@material-ui/core/Button';
 import api from '../../../utils/API';
 import { makeStyles } from '@material-ui/core';
+import ComponentDelete from '../../../components/Dialogs/DialogDelete'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +32,7 @@ const initialState = {
     erro: null
 }
 
-export default function MainTeam() {
+export default function MainTeam(props) {
     const [state, setState] = useState(initialState);
     const classes = useStyles();
     const { teams } = state;
@@ -74,9 +75,7 @@ export default function MainTeam() {
                                 <Button href={"team/update/" + team.id} className={classes.button}>
                                     Alterar
                                 </Button>
-                                <Button href={"team/delete/" + team.id} className={classes.button}>
-                                    Delete
-                                </Button>
+                                <ComponentDelete setState={setState} history={props.history} deletePath={"teams/" + team.id}/>
                             </TableCell>
                         </TableRow>
                     ))}
