@@ -41,7 +41,7 @@ export default function MainCourse(props) {
         async function getCourses() {
             const response = await api.get(`/course`);
 
-            setState({ courses: response.data });
+            setState({ courses: response.data.data });
         }
 
         getCourses();
