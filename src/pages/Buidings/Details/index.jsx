@@ -6,7 +6,7 @@ export default class BuildingDetails extends Component {
         building: {
             id: 0,
             name: "",
-            status: ""
+            active: ""
         },
     };
 

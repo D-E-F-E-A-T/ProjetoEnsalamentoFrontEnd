@@ -6,14 +6,14 @@ export default class BuildingDetails extends Component {
         building: {
             id: 0,
             name: "",
-            status: ""
+            active: ""
         },
     };
 
     async componentDidMount() {
         const { id } = this.props.match.params;
              
-        const response = await api.get(`/buildings/${id}`);
+        const response = await api.get(`/building/${id}`);
         console.log(response)
         this.setState({ building: response.data });
     }

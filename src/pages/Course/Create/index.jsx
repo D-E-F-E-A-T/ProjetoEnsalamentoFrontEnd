@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const initialState = {
   course: {
     name: "",
-    status: true
+    active: true
   },
   erro: null
 }
@@ -68,7 +68,7 @@ export default function CreateCourse(props) {
   };
 
   const handleSubmit = async () => {
-    api.post('/courses', state.course)
+    api.post('/course', state.course)
       .then(res => {
         props.history.push('/courses')
         console.log(res);
@@ -106,11 +106,11 @@ export default function CreateCourse(props) {
               }}
               color="primary"
               name="status"
-              value={state.course.status}
-              checked={state.course.status === true}
+              value={state.course.active}
+              checked={state.course.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.course.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.course.active === true ? "Ativo" : "Inativo") + ")"}
           />
           
         </Grid>

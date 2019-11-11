@@ -39,7 +39,7 @@ export default function MainCourse(props) {
 
     useEffect(() => {
         async function getCourses() {
-            const response = await api.get(`/courses`);
+            const response = await api.get(`/course`);
 
             setState({ courses: response.data });
         }
@@ -67,7 +67,7 @@ export default function MainCourse(props) {
                             <TableCell component="th" scope="row">
                                 {course.name}
                             </TableCell>
-                            <TableCell>{course.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{course.active ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell align="center">
                                 <Button href={"course/details/" + course.id} className={classes.button}>
                                     Detalhes

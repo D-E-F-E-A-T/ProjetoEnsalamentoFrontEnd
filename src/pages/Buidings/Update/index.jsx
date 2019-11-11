@@ -14,7 +14,7 @@ const initialState = {
     building: {
         id: 0,
         name: "",
-        status: true
+        active: true
     },
     erro: null
 }
@@ -51,7 +51,7 @@ export default function UpdateBuilding(props) {
 
     useEffect(() => {
         async function getBuilding() {
-            const response = await api.get(`/Buildings/${id}`);
+            const response = await api.get(`/building/${id}`);
             console.log(response)
             setState({ building: response.data });
         }
@@ -78,7 +78,7 @@ export default function UpdateBuilding(props) {
     };
 
     const handleSubmit = async () => {
-      api.put('/buildings/' + id, state.building)
+      api.put('/building/' + id, state.building)
         .then(res => {
           
           props.history.push('/buildings')
@@ -116,11 +116,11 @@ export default function UpdateBuilding(props) {
               }}
               color="primary"
               name="status"
-              value={state.building.status}
-              checked={state.building.status === true}
+              value={state.building.active}
+              checked={state.building.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.building.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.building.active === true ? "Ativo" : "Inativo") + ")"}
           />
           
         </Grid>

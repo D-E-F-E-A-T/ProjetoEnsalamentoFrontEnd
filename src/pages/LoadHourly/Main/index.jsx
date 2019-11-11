@@ -39,7 +39,7 @@ export default function MainLoadHourly(props) {
 
     useEffect(() => {
         async function getLoadHourlies() {
-            const response = await api.get(`/loadhourlies`);
+            const response = await api.get(`/loadhourly`);
 
             setState({ loadHourlies: response.data });
         }
@@ -71,7 +71,7 @@ export default function MainLoadHourly(props) {
                             <TableCell component="th" scope="row">
                                 {loadHourly.value}
                             </TableCell>
-                            <TableCell>{loadHourly.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{loadHourly.active ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell align="center">
                                 <Button href={"loadHorly/details/" + loadHourly.id} className={classes.button}>
                                     Detalhes

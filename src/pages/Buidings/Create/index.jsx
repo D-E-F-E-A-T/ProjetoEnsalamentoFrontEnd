@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const initialState = {
   building: {
     name: "",
-    status: true
+    active: true
   },
   errors: []
 }
@@ -75,7 +75,7 @@ export default function CreateBuilding(props) {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await api.post('/buildings', state.building);
+      const res = await api.post('/building', state.building);
       props.history.push('/buildings')
       console.log(res);
       console.log(res.data);
@@ -121,11 +121,11 @@ export default function CreateBuilding(props) {
               }}
               color="primary"
               name="status"
-              value={state.building.status}
-              checked={state.building.status === true}
+              value={state.building.active}
+              checked={state.building.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.building.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.building.active === true ? "Ativo" : "Inativo") + ")"}
           />
 
         </Grid>

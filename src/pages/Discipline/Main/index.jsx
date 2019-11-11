@@ -39,7 +39,7 @@ export default function MainRooms(props) {
 
     useEffect(() => {
         async function getRooms() {
-            const response = await api.get(`/disciplines`);
+            const response = await api.get(`/discipline`);
 
             setState({ disciplines: response.data });
         }
@@ -71,7 +71,7 @@ export default function MainRooms(props) {
                             <TableCell component="th" scope="row" align="center">
                                 {discipline.numberStudents}
                             </TableCell>
-                            <TableCell>{discipline.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{discipline.active ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell align="center">
                                 <Button href={"discipline/details/" + discipline.id} className={classes.button}>
                                     Detalhes

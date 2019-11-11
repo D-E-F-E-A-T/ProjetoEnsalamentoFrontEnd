@@ -3,7 +3,7 @@ import api from '../../../utils/API';
 
 export default class BuildingDetails extends Component {
     state = {
-        building: {
+        course: {
             id: 0,
             name: "",
             status: ""
@@ -13,7 +13,7 @@ export default class BuildingDetails extends Component {
     async componentDidMount() {
         const { id } = this.props.match.params;
              
-        const response = await api.get(`/buildings/${id}`);
+        const response = await api.get(`/course/${id}`);
         console.log(response)
         this.setState({ building: response.data });
     }

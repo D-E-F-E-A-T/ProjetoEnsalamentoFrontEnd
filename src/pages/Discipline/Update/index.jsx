@@ -18,7 +18,7 @@ const initialState = {
     load_hourly_id: 0,
     course_id: 0,
     team_id: 0,
-    status: true,
+    active: true,
   },
   erro: null
 }
@@ -64,13 +64,13 @@ export default function CreateRoom(props) {
   useEffect(() => {
 
     async function getDiscipline() {
-      const response = await api.get(`/disciplines/${id}`);
+      const response = await api.get(`/discipline/${id}`);
       console.log(response)
       setState({ discipline: response.data });
     }
 
     async function getLoadhourlies() {
-        const response = await api.get(`/loadhourlies`);
+        const response = await api.get(`/loadhourlie`);
         let loadhourliesOptions = [{ key: 0}];
 
         response.data.forEach( dado => {
@@ -84,7 +84,7 @@ export default function CreateRoom(props) {
     }
 
     async function getCourses() {
-      const response = await api.get(`/courses`);
+      const response = await api.get(`/course`);
       let coursesOptions = [{ key: 0}];
 
       response.data.forEach( dado => {
@@ -98,7 +98,7 @@ export default function CreateRoom(props) {
     }
 
     async function getTeams() {
-      const response = await api.get(`/teams`);
+      const response = await api.get(`/team`);
       let teamsOptions = [{ key: 0}];
 
       response.data.forEach( dado => {
@@ -143,7 +143,7 @@ export default function CreateRoom(props) {
   };
 
   const handleSubmit = async () => {
-    api.put('/disciplines/' + id, state.discipline)
+    api.put('/discipline/' + id, state.discipline)
         .then(res => {
           
           props.history.push('/disciplines')
@@ -306,11 +306,11 @@ export default function CreateRoom(props) {
               }}
               color="primary"
               name="status"
-              value={state.discipline.status}
-              checked={state.discipline.status === true}
+              value={state.discipline.active}
+              checked={state.discipline.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.discipline.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.discipline.active === true ? "Ativo" : "Inativo") + ")"}
           />
         </Grid>
 

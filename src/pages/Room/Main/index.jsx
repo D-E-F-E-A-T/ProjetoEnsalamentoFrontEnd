@@ -39,7 +39,7 @@ export default function MainRooms(props) {
 
     useEffect(() => {
         async function getRooms() {
-            const response = await api.get(`/Rooms`);
+            const response = await api.get(`/Room`);
 
             setState({ room: response.data });
         }
@@ -75,7 +75,7 @@ export default function MainRooms(props) {
                             <TableCell component="th" scope="row" align="center">
                                 {room.maxCapacity}
                             </TableCell>
-                            <TableCell>{room.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{room.active ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell align="center">
                                 <Button href={"room/details/" + room.id} className={classes.button}>
                                     Detalhes

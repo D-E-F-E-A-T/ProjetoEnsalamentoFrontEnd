@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const initialState = {
   team: {
     name: "",
-    status: true
+    active: true
   },
   erro: null
 }
@@ -70,7 +70,7 @@ export default function CreateTeam(props) {
   const handleSubmit = async () => {
     api.post('/teams', state.team)
       .then(res => {
-        props.history.push('/teams')
+        props.history.push('/team')
         console.log(res);
         console.log(res.data);
       })
@@ -106,11 +106,11 @@ export default function CreateTeam(props) {
               }}
               color="primary"
               name="status"
-              value={state.team.status}
-              checked={state.team.status === true}
+              value={state.team.active}
+              checked={state.team.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.team.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.team.active === true ? "Ativo" : "Inativo") + ")"}
           />
           
         </Grid>

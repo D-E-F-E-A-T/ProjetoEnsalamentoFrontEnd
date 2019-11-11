@@ -14,7 +14,7 @@ const initialState = {
     course: {
         id: 0,
         name: "",
-        status: true
+        active: true
     },
     erro: null
 }
@@ -51,7 +51,7 @@ export default function UpdateCourse(props) {
 
     useEffect(() => {
         async function getCourse() {
-            const response = await api.get(`/courses/${id}`);
+            const response = await api.get(`/course/${id}`);
             console.log(response)
             setState({ course: response.data });
         }
@@ -78,7 +78,7 @@ export default function UpdateCourse(props) {
     };
 
     const handleSubmit = async () => {
-      api.put('/courses/' + id, state.course)
+      api.put('/course/' + id, state.course)
         .then(res => {
           
           props.history.push('/courses')
@@ -117,11 +117,11 @@ export default function UpdateCourse(props) {
               }}
               color="primary"
               name="status"
-              value={state.course.status}
-              checked={state.course.status === true}
+              value={state.course.active}
+              checked={state.course.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.course.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.course.active === true ? "Ativo" : "Inativo") + ")"}
           />
           
         </Grid>

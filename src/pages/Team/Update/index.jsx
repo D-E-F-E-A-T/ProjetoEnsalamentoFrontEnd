@@ -14,7 +14,7 @@ const initialState = {
     team: {
         id: 0,
         name: "",
-        status: true
+        active: true
     },
     erro: null
 }
@@ -51,7 +51,7 @@ export default function BuildingDetails(props) {
 
     useEffect(() => {
         async function getTeam() {
-            const response = await api.get(`/Teams/${id}`);
+            const response = await api.get(`/Team/${id}`);
             console.log(response)
             setState({ team: response.data });
         }
@@ -78,7 +78,7 @@ export default function BuildingDetails(props) {
     };
 
     const handleSubmit = async () => {
-      api.put('/teams/' + id, state.team)
+      api.put('/team/' + id, state.team)
         .then(res => {
           
           props.history.push('/teams')
@@ -117,11 +117,11 @@ export default function BuildingDetails(props) {
               }}
               color="primary"
               name="status"
-              value={state.team.status}
-              checked={state.team.status === true}
+              value={state.team.active}
+              checked={state.team.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.team.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.team.active === true ? "Ativo" : "Inativo") + ")"}
           />
           
         </Grid>

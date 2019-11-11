@@ -14,7 +14,7 @@ const initialState = {
   loadHourly: {
     description: "",
     value: 0,
-    status: true
+    active: true
   },
   erro: null
 }
@@ -51,7 +51,7 @@ export default function UpdateLoadHourly(props) {
 
     useEffect(() => {
         async function getLoadHourly() {
-            const response = await api.get(`/loadhourlies/${id}`);
+            const response = await api.get(`/loadhourly/${id}`);
             console.log(response)
             setState({ loadHourly: response.data });
         }
@@ -78,7 +78,7 @@ export default function UpdateLoadHourly(props) {
     };
 
     const handleSubmit = async () => {
-      api.put('/loadhourlies/' + id, state.loadHourly)
+      api.put('/loadhourly/' + id, state.loadHourly)
         .then(res => {
           
           props.history.push('/loadhourlies')
@@ -138,11 +138,11 @@ export default function UpdateLoadHourly(props) {
               }}
               color="primary"
               name="status"
-              value={state.loadHourly.status}
-              checked={state.loadHourly.status === true}
+              value={state.loadHourly.active}
+              checked={state.loadHourly.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.loadHourly.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.loadHourly.active === true ? "Ativo" : "Inativo") + ")"}
           />
           
         </Grid>

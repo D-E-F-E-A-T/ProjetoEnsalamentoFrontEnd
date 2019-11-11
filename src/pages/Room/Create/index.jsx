@@ -15,7 +15,7 @@ const initialState = {
     name: "",
     maxCapacity : 0,
     building_id: 0,
-    status: true,
+    active: true,
   },
   erro: null
 }
@@ -57,7 +57,7 @@ export default function CreateRoom(props) {
 
   useEffect(() => {
     async function getBuildings() {
-        const response = await api.get(`/Buildings`);
+        const response = await api.get(`/Building`);
         let buildingOptions = [{ key: 0}];
 
         response.data.forEach( dado => {
@@ -99,7 +99,7 @@ export default function CreateRoom(props) {
   };
 
   const handleSubmit = async () => {
-    api.post('/rooms', state.room)
+    api.post('/room', state.room)
       .then(res => {
         console.log(res)
         props.history.push('/rooms')
@@ -187,11 +187,11 @@ export default function CreateRoom(props) {
               }}
               color="primary"
               name="status"
-              value={state.room.status}
-              checked={state.room.status === true}
+              value={state.room.active}
+              checked={state.room.active === true}
               onChange={handleChangeCheckbox}
             />}
-            label={"Status (" + (state.room.status === true ? "Ativo" : "Inativo") + ")"}
+            label={"Status (" + (state.room.active === true ? "Ativo" : "Inativo") + ")"}
           />
         </Grid>
 

@@ -39,7 +39,7 @@ export default function MainBuildings(props) {
 
     useEffect(() => {
         async function getBuildings() {
-            const response = await api.get(`/Buildings`);
+            const response = await api.get(`/Building`);
 
             setState({ building: response.data });
         }
@@ -67,7 +67,7 @@ export default function MainBuildings(props) {
                             <TableCell component="th" scope="row">
                                 {building.name}
                             </TableCell>
-                            <TableCell>{building.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{building.active ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell align="center">
                                 <Button href={"building/details/" + building.id} className={classes.button}>
                                     Detalhes

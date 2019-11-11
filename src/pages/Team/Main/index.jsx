@@ -39,7 +39,7 @@ export default function MainTeam(props) {
 
     useEffect(() => {
         async function getTeams() {
-            const response = await api.get(`/teams`);
+            const response = await api.get(`/team`);
 
             setState({ teams: response.data });
         }
@@ -67,7 +67,7 @@ export default function MainTeam(props) {
                             <TableCell component="th" scope="row">
                                 {team.name}
                             </TableCell>
-                            <TableCell>{team.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{team.active ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell align="center">
                                 <Button href={"team/details/" + team.id} className={classes.button}>
                                     Detalhes
