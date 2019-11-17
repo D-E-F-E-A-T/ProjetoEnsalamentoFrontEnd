@@ -60,7 +60,7 @@ export default function CreateRoom(props) {
         const response = await api.get(`/Building`);
         let buildingOptions = [{ key: 0}];
 
-        response.data.forEach( dado => {
+        response.data.data.forEach( dado => {
           let option = {
             value : dado.id,
             label : dado.name

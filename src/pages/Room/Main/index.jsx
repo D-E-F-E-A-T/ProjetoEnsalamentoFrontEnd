@@ -41,7 +41,7 @@ export default function MainRooms(props) {
         async function getRooms() {
             const response = await api.get(`/Room`);
 
-            setState({ room: response.data });
+            setState({ room: response.data.data });
         }
 
         getRooms();
@@ -68,9 +68,6 @@ export default function MainRooms(props) {
                         <TableRow key={index}>
                             <TableCell component="th" scope="row">
                                 {room.name}
-                            </TableCell>
-                            <TableCell component="th" scope="row">
-                                {room.building.name}
                             </TableCell>
                             <TableCell component="th" scope="row" align="center">
                                 {room.maxCapacity}

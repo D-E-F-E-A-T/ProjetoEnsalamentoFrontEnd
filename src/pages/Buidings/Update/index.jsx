@@ -53,7 +53,7 @@ export default function UpdateBuilding(props) {
         async function getBuilding() {
             const response = await api.get(`/building/${id}`);
             console.log(response)
-            setState({ building: response.data });
+            setState({ building: response.data.data });
         }
 
         getBuilding();

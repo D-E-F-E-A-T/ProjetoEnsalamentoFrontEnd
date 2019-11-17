@@ -41,7 +41,7 @@ export default function MainBuildings(props) {
         async function getBuildings() {
             const response = await api.get(`/Building`);
 
-            setState({ building: response.data });
+            setState({ building: response.data.data });
         }
 
         getBuildings();
