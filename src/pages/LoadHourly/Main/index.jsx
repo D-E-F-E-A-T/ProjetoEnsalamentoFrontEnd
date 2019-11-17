@@ -41,7 +41,7 @@ export default function MainLoadHourly(props) {
         async function getLoadHourlies() {
             const response = await api.get(`/loadhourly`);
 
-            setState({ loadHourlies: response.data });
+            setState({ loadHourlies: response.data.data });
         }
 
         getLoadHourlies();

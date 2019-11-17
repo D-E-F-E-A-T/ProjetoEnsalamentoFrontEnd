@@ -41,7 +41,7 @@ export default function MainRooms(props) {
         async function getRooms() {
             const response = await api.get(`/discipline`);
 
-            setState({ disciplines: response.data });
+            setState({ disciplines: response.data.data });
         }
 
         getRooms();
