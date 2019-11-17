@@ -85,7 +85,7 @@ export default function MainRooms(props) {
                                     getRoute="/Rooms" 
                                     setState={setState} 
                                     history={props.history} 
-                                    deletePath={"rooms/" + room.id}/>
+                                    deletePath={"room/" + room.id}/>
                             </TableCell>
                         </TableRow>
                     ))}

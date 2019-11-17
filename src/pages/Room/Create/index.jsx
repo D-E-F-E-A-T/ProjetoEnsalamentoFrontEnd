@@ -9,13 +9,23 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Input from '@material-ui/core/Input';
+import Days from '../../../utils/Enuns/Days'
+import Shifties from '../../../utils/Enuns/Shifties'
 
 const initialState = {
   room: {
     name: "",
     maxCapacity : 0,
-    building_id: 0,
+    idBuilding: 0,
     active: true,
+    daysDisponibilities : [],
+    shitDisponibilities : []
   },
   erro: null
 }
@@ -46,15 +56,37 @@ const useStyles = makeStyles(theme => ({
   menu: {
     width: 200,
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 350,
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    margin: 2,
+  },
+  noLabel: {
+    marginTop: theme.spacing(3),
+  },
 }));
-
-
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 export default function CreateRoom(props) {
   const [state, setState] = useState(initialState);
   const [buildings, setBuildings] = useState([])
   const classes = useStyles();
-
+  
   useEffect(() => {
     async function getBuildings() {
         const response = await api.get(`/Building`);
@@ -178,6 +210,53 @@ export default function CreateRoom(props) {
             </TextField>
           </Grid>
         </Grid>
+
+
+        <FormControl className={classes.formControl}>
+        <InputLabel id="demo-mutiple-checkbox-label">Dias Disponiveis</InputLabel>
+        <Select
+          labelid="demo-mutiple-checkbox-label"
+          id="demo-mutiple-checkbox"
+          multiple
+          name="daysDisponibilities"
+          value={state.room.daysDisponibilities}
+          onChange={handleInputChange}
+          input={<Input />}
+          renderValue={selected => selected.join(', ')}
+          MenuProps={MenuProps}
+          variant="outlined"
+        >
+          {Days.map((day, i) => (
+            <MenuItem key={i} value={day.value}>
+              <Checkbox checked={state.room.daysDisponibilities.indexOf(day.value) > -1} />
+              <ListItemText primary={day.name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-mutiple-checkbox-label2">Turnos Disponiveis</InputLabel>
+        <Select
+          labelid="demo-mutiple-checkbox-label2"
+          id="demo-mutiple-checkbox2"
+          multiple
+          name="shitDisponibilities"
+          value={state.room.shitDisponibilities}
+          onChange={handleInputChange}
+          input={<Input />}
+          renderValue={selected => selected.join(', ')}
+          MenuProps={MenuProps}
+          variant="outlined"
+        >
+          {Shifties.map((shift, i) => (
+            <MenuItem key={i} value={shift.value}>
+              <Checkbox checked={state.room.shitDisponibilities.indexOf(shift.value) > -1} />
+              <ListItemText primary={shift.name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
         <Grid item xs={12}>
         <FormControlLabel
