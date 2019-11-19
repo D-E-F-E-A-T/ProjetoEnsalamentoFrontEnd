@@ -68,9 +68,9 @@ export default function CreateTeam(props) {
   };
 
   const handleSubmit = async () => {
-    api.post('/teams', state.team)
+    api.post('/team', state.team)
       .then(res => {
-        props.history.push('/team')
+        props.history.push('/teams')
         console.log(res);
         console.log(res.data);
       })

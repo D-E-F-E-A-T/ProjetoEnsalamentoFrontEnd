@@ -9,15 +9,25 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Input from '@material-ui/core/Input';
+import Days from '../../../utils/Enuns/Days'
+import Shifties from '../../../utils/Enuns/Shifties'
 
 const initialState = {
   discipline: {
     name: "",
     code : "",
     numberStudents : "",
-    load_hourly_id: 0,
-    course_id: 0,
-    team_id: 0,
+    idLoadHourly: 0,
+    idCourse: 0,
+    idTeam: 0,
+    daysDisponibilities : [],
+    shitDisponibilities : [],
     active: true,
   },
   erro: null
@@ -49,9 +59,32 @@ const useStyles = makeStyles(theme => ({
   menu: {
     width: 200,
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 350,
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    margin: 2,
+  },
+  noLabel: {
+    marginTop: theme.spacing(3),
+  },
 }));
 
-
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 export default function CreateRoom(props) {
   const [state, setState] = useState(initialState);
@@ -62,10 +95,10 @@ export default function CreateRoom(props) {
 
   useEffect(() => {
     async function getLoadhourlies() {
-        const response = await api.get(`/loadhourlie`);
+        const response = await api.get(`/loadhourly`);
         let loadhourliesOptions = [{ key: 0}];
 
-        response.data.forEach( dado => {
+        response.data.data.forEach( dado => {
           let option = {
             value : dado.id,
             label : dado.description
@@ -79,7 +112,7 @@ export default function CreateRoom(props) {
       const response = await api.get(`/course`);
       let coursesOptions = [{ key: 0}];
 
-      response.data.forEach( dado => {
+      response.data.data.forEach( dado => {
         let option = {
           value : dado.id,
           label : dado.name
@@ -93,7 +126,7 @@ export default function CreateRoom(props) {
       const response = await api.get(`/team`);
       let teamsOptions = [{ key: 0}];
 
-      response.data.forEach( dado => {
+      response.data.data.forEach( dado => {
         let option = {
           value : dado.id,
           label : dado.name
@@ -204,7 +237,7 @@ export default function CreateRoom(props) {
               select
               fullWidth
               label="Carga Horária"
-              name="load_hourly_id"
+              name="idLoadHourly"
               className={classes.textField}
               value={state.discipline.load_hourly_id}
               onChange={handleChangeSelect}
@@ -234,7 +267,7 @@ export default function CreateRoom(props) {
               select
               fullWidth
               label="Curso"
-              name="course_id"
+              name="idCourse"
               className={classes.textField}
               value={state.discipline.course_id}
               onChange={handleChangeSelect}
@@ -264,7 +297,7 @@ export default function CreateRoom(props) {
               select
               fullWidth
               label="Turma"
-              name="team_id"
+              name="idTeam"
               className={classes.textField}
               value={state.discipline.team_id}
               onChange={handleChangeSelect}
@@ -287,7 +320,53 @@ export default function CreateRoom(props) {
           </Grid>
         </Grid>
 
-        <Grid item xs={12}>
+        <FormControl className={classes.formControl}>
+        <InputLabel id="demo-mutiple-checkbox-label">Dias Disponiveis</InputLabel>
+        <Select
+          labelid="demo-mutiple-checkbox-label"
+          id="demo-mutiple-checkbox"
+          multiple
+          name="daysDisponibilities"
+          value={state.discipline.daysDisponibilities}
+          onChange={handleInputChange}
+          input={<Input />}
+          renderValue={selected => selected.join(', ')}
+          MenuProps={MenuProps}
+          variant="outlined"
+        >
+          {Days.map((day, i) => (
+            <MenuItem key={i} value={day.value}>
+              <Checkbox color="primary" checked={state.discipline.daysDisponibilities.indexOf(day.value) > -1} />
+              <ListItemText primary={day.name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-mutiple-checkbox-label2">Turnos Disponiveis</InputLabel>
+        <Select
+          labelid="demo-mutiple-checkbox-label2"
+          id="demo-mutiple-checkbox2"
+          multiple
+          name="shitDisponibilities"
+          value={state.discipline.shitDisponibilities}
+          onChange={handleInputChange}
+          input={<Input />}
+          renderValue={selected => selected.join(', ')}
+          MenuProps={MenuProps}
+          variant="outlined"
+        >
+          {Shifties.map((shift, i) => (
+            <MenuItem key={i} value={shift.value}>
+              <Checkbox color="primary" checked={state.discipline.shitDisponibilities.indexOf(shift.value) > -1} />
+              <ListItemText primary={shift.name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <Grid item xs={12}>
         <FormControlLabel
           control = {<Checkbox
               inputProps={{

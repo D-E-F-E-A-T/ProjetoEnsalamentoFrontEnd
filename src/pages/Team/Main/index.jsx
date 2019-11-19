@@ -41,7 +41,7 @@ export default function MainTeam(props) {
         async function getTeams() {
             const response = await api.get(`/team`);
 
-            setState({ teams: response.data });
+            setState({ teams: response.data.data });
         }
 
         getTeams();

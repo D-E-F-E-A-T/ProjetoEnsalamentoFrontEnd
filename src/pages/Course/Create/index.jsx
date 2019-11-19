@@ -74,6 +74,7 @@ export default function CreateCourse(props) {
         console.log(res);
         console.log(res.data);
       })
+      .catch(res => console.log(res.response))
   }
 
   return (
