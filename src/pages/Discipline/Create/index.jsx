@@ -179,7 +179,7 @@ export default function CreateRoom(props) {
       <CssBaseline />
 
       <Typography component="h1" variant="h5">
-        Criar Sala
+        Criar Disciplina
       </Typography>
       <form onSubmit={(e) => {handleSubmit(); e.preventDefault();}}>
 

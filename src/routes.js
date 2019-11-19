@@ -26,6 +26,8 @@ import MainDisciplines from './pages/Discipline/Main';
 import CreateDiscipline from './pages/Discipline/Create';
 import UpdateDiscipline from './pages/Discipline/Update';
 
+import Ensalament from './pages/Ensalament/Create/index';
+
 const Routes = () => (
 
     <Switch>
@@ -53,6 +55,8 @@ const Routes = () => (
         <Route path="/disciplines" component={MainDisciplines} />
         <Route path="/discipline/create" component={CreateDiscipline} />
         <Route path="/discipline/update/:id" component={UpdateDiscipline} />
+
+        <Route path="/ensalament" component={Ensalament} />
     </Switch>
 )
 
