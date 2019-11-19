@@ -136,6 +136,7 @@ export default function CreateRoom(props) {
         console.log(res)
         props.history.push('/rooms')
       })
+      .catch( res => console.log(res.response))
   }
 
   return (
@@ -188,7 +189,7 @@ export default function CreateRoom(props) {
               select
               fullWidth
               label="Prédio"
-              name="building_id"
+              name="idBuilding"
               className={classes.textField}
               value={state.room.building_id}
               onChange={handleChangeSelect}

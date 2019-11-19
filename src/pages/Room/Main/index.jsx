@@ -69,6 +69,9 @@ export default function MainRooms(props) {
                             <TableCell component="th" scope="row">
                                 {room.name}
                             </TableCell>
+                            <TableCell component="th" scope="row">
+                                {room.building.name}
+                            </TableCell>
                             <TableCell component="th" scope="row" align="center">
                                 {room.maxCapacity}
                             </TableCell>
