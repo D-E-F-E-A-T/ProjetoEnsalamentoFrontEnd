@@ -229,7 +229,7 @@ export default function CreateRoom(props) {
         >
           {Days.map((day, i) => (
             <MenuItem key={i} value={day.value}>
-              <Checkbox checked={state.room.daysDisponibilities.indexOf(day.value) > -1} />
+              <Checkbox color="primary" checked={state.room.daysDisponibilities.indexOf(day.value) > -1} />
               <ListItemText primary={day.name} />
             </MenuItem>
           ))}
@@ -252,7 +252,7 @@ export default function CreateRoom(props) {
         >
           {Shifties.map((shift, i) => (
             <MenuItem key={i} value={shift.value}>
-              <Checkbox checked={state.room.shitDisponibilities.indexOf(shift.value) > -1} />
+              <Checkbox color="primary" checked={state.room.shitDisponibilities.indexOf(shift.value) > -1} />
               <ListItemText primary={shift.name} />
             </MenuItem>
           ))}

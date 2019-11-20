@@ -3,16 +3,15 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ApartmentIcon from '@material-ui/icons/Apartment';
-// import AssignmentIcon from '@material-ui/icons/Assignment';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SchoolIcon from '@material-ui/icons/School';
 import { Link } from "react-router-dom";
+import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 
 export const mainListItems = (
   <List>
@@ -76,6 +75,15 @@ export const mainListItems = (
           <GroupIcon />
         </ListItemIcon>
         <ListItemText primary="Turmas" />
+      </ListItem>
+    </Link>
+
+    <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.87)" }} to="/ensalament">
+      <ListItem button>
+        <ListItemIcon>
+          <AccessibleForwardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Ensalamento" />
       </ListItem>
     </Link>
   </List>
