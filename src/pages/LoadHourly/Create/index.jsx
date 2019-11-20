@@ -69,9 +69,9 @@ export default function CreateLoadHourly(props) {
   };
 
   const handleSubmit = async () => {
-    api.post('/loadhourlies', state.loadHourly)
+    api.post('/loadhourly', state.loadHourly)
       .then(res => {
-        props.history.push('/loadhourly')
+        props.history.push('/loadhourlies')
         console.log(res);
         console.log(res.data);
       })
