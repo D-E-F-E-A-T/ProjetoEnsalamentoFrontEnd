@@ -85,7 +85,7 @@ export default function MainRooms(props) {
                                 </Button>
                                 <ComponentDelete 
                                     nameState="room" 
-                                    getRoute="/Rooms" 
+                                    getRoute="/Room" 
                                     setState={setState} 
                                     history={props.history} 
                                     deletePath={"room/" + room.id}/>
