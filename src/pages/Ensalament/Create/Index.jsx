@@ -82,13 +82,17 @@ export default function MainBuildings() {
   useEffect(() => {
     async function getEnsalament() {
       const response = await api.get(`/Ensalament`);
-
       setState({ ensalament: response.data.data });
+
+      // response.data.data.treateds.map((ha, index) => (
+      //   console.warn("response.data", ha)
+      // ))
+      console.warn("response.data", response.data.data)
+      
+
 
       const teste = await api.get(`/Building`);
       setStateBuilding({ building: teste.data.data });
-
-      console.warn("response.data", teste.data.data);
     }
     getEnsalament();
   }, []);
@@ -114,9 +118,11 @@ export default function MainBuildings() {
                 <Typography gutterBottom variant="h3">
                   {b.name}
                 </Typography>
-                <Typography variant="h5" component="h2">
-                  Sala 1
-                </Typography>
+                {b.rooms.map((room, index) => (
+                  <Typography key={index} variant="h5" component="h2">
+                    {room.name} - {room.maxCapacity}
+                  </Typography>
+                ))}
               </CardContent>
             </CardActionArea>
           </Card>
