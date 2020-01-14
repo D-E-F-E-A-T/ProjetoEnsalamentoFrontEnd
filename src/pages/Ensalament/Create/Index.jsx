@@ -13,16 +13,12 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 
 const initialState = {
   ensalament: {
-    notTreated: {
-      disciplines: [],
-      rooms: []
-    },
+    disciplinesNotTreated: [],
     treateds: [
       {
         daysDisponibility: 0,
-        disciplines: [],
-        rooms: [],
-        shiftDisponibility: 0
+        discipline: "",
+        room : ""
       }
     ]
   }
@@ -74,6 +70,7 @@ export default function MainBuildings() {
   const [stateBuilding, setStateBuilding] = useState(initialStateBuilding);
   const [value, setValue] = React.useState(0);
   const classes = useStyles();
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -84,10 +81,8 @@ export default function MainBuildings() {
       const response = await api.get(`/Ensalament`);
       setState({ ensalament: response.data.data });
 
-      // response.data.data.treateds.map((ha, index) => (
-      //   console.warn("response.data", ha)
-      // ))
-      console.warn("response.data", response.data.data)
+      console.warn("response.data.data", response.data.data)
+      console.warn("response.data.data", response.data.data.treateds)
       
 
 
