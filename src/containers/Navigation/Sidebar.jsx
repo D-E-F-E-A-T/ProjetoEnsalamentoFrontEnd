@@ -27,7 +27,7 @@ const Dashboard = () => {
       closeSidebar={closeMenu}
     >
       <List>
-        <SidebarItem path="/" label="Prédios" icon={<Apartment />} />
+        <SidebarItem path="/predios" label="Prédios" icon={<Apartment />} />
       </List>
     </SidebarComponent>
   );

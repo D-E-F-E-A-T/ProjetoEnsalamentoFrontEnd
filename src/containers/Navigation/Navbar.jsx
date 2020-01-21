@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import DashboarComponent from "../../components/Navigation/Dashboard";
+import DashboarComponent from "../../components/Navigation/Navbar";
 import { Creators as MenuActions } from "../../store/ducks/Navigation";
 
 const Dashboard = () => {
