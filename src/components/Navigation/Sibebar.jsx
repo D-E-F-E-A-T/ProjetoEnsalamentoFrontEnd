@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     backgroundRepeat: "no-repeat",
     backgroundSize: "240px 100%",
-    background: "linear-gradient(-206deg, #00B4DB 35%, #0083B0)",
+    background: "linear-gradient(-206deg, #2b70e0 35%, #1863db)",
     width: drawerWidth,
     color: "white",
     bottom: 0

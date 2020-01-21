@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { List, Divider } from "@material-ui/core";
+import { List } from "@material-ui/core";
 import { Apartment } from "@material-ui/icons";
 
 import SidebarComponent from "../../components/Navigation/Sibebar";

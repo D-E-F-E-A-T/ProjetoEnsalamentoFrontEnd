@@ -4,16 +4,16 @@ import { createActions, createReducer } from "reduxsauce";
  * Action types & creators
  */
 export const { Types, Creators } = createActions({
-  toogleMenu: null,
-  openMenu: null,
-  closeMenu: null
+  toogleMenu: [],
+  openMenu: [],
+  closeMenu: []
 });
 
 /**
  * Handlers
  */
 const INITIAL_STATE = {
-  showMenu: false
+  showMenu: true
 };
 
 const ToogleMenu = (state = INITIAL_STATE) => ({

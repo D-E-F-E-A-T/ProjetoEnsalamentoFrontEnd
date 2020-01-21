@@ -46,10 +46,10 @@ const useStyles = makeStyles(theme => ({
     zIndex: 9999,
     border: 0,
     [theme.breakpoints.up("xs")]: {
-      background: "linear-gradient(-206deg, #00B4DB 35%, #0083B0)"
+      background: "linear-gradient(-206deg, #2b70e0 35%, #1863db)"
     },
     [theme.breakpoints.down("xs")]: {
-      background: "#00B4DB"
+      background: "#2b70e0"
     }
   },
   hamburger: {

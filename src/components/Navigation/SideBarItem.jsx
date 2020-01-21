@@ -8,12 +8,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+const validationItem = item => !!item;
+
 const SidebarItem = ({ path, nested, icon, label }) => {
   // eslint-disable-next-line no-use-before-define
   const classes = useStyles(0);
   return (
     <Link to={path} className={classes.link}>
-      <ListItem button className={!!nested ? classes.nested : ""}>
+      <ListItem button className={validationItem(nested) ? classes.nested : ""}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={label} />
       </ListItem>
@@ -37,6 +39,6 @@ const useStyles = makeStyles(theme => ({
   },
   nested: {
     paddingLeft: theme.spacing(4),
-    background: "rgba(0, 0, 0, 0.04)"
+    background: "rgba(0, 0, 0, 0.5)"
   }
 }));
