@@ -1,7 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import { BrowserRouter } from "react-router-dom";
 
-import Navbar from "../components/Navigation/Dashboard";
+import Navbar from "../containers/Navigation/Dashboard";
+import Sidebar from "../containers/Navigation/Sidebar";
 
 const IndexView = () => {
   // eslint-disable-next-line no-use-before-define
@@ -9,7 +11,10 @@ const IndexView = () => {
 
   return (
     <div className={classes.root}>
-      <Navbar />
+      <BrowserRouter>
+        <Navbar />
+        <Sidebar />
+      </BrowserRouter>
     </div>
   );
 };
