@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 import clsx from "clsx";
 import React from "react";
 import PropTypes from "prop-types";
@@ -13,7 +14,9 @@ const Content = ({ sidebarIsOpen, children }) => {
         [classes.contentShift]: sidebarIsOpen
       })}
     >
-      {children}
+      <Container maxWidth="lg" className={classes.container}>
+        {children}
+      </Container>
     </main>
   );
 };
@@ -32,6 +35,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 20,
     minHeight: "calc(100vh - 20px)",
     flexGrow: 1,
+    overflow: "auto",
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -48,5 +52,9 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginLeft: "0px !important"
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
   }
 }));
