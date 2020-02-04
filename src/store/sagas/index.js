@@ -1,9 +1,6 @@
-import { all, fork } from "redux-saga/effects";
+import { all } from "redux-saga/effects";
+import BuildingSaga from "./Building";
 
-import * as BuildingSaga from "./Building";
-
-export default function* rootSaga() {
-  yield all(
-    [...Object.values(BuildingSaga)/*, ...Object.values(accountSagas)*/].map(fork)
-  );
+export default function* root() {
+  yield all([...BuildingSaga]);
 }

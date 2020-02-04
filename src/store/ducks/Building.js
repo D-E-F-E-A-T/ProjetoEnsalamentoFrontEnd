@@ -13,17 +13,17 @@ export const { Types, Creators } = createActions({
  * Handlers
  */
 const INITIAL_STATE = {
-  buildings: [{}],
+  buildings: [],
   errors: []
 };
 
-const LoadSuccess = (state = INITIAL_STATE, buildings) => ({
+const LoadSuccess = (state = INITIAL_STATE, { buildings }) => ({
   ...state,
   buildings,
   errors: INITIAL_STATE.errors
 });
 
-const LoadFailure = (state = INITIAL_STATE, errors) => ({
+const LoadFailure = (state = INITIAL_STATE, { errors }) => ({
   ...state,
   errors
 });

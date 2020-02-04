@@ -1,18 +1,32 @@
-import { call, put, all, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 
 import api from "../../services/api";
-import { Creators as BuldingActions } from "../ducks/Building";
+import { Types as BuildingTypes } from "../ducks/Building";
 
-function* load() {
+function* loadRequest() {
   try {
     const response = yield call(api.get, "/building");
 
-    yield put(BuldingActions.loadSuccess(response.data));
+    yield put({
+      type: BuildingTypes.LOAD_SUCCESS,
+      buildings: response.data
+    });
   } catch (err) {
-    put(BuldingActions.loadFailure());
+    yield put({
+      type: BuildingTypes.LOAD_FAILURE,
+      errors: err
+    });
   }
 }
 
-export function* rootSaga() {
-  return yield all([takeLatest(BuldingActions.loadRequest, load)]);
-}
+// function* login() {
+//   // ...
+//   yield put(BuildingActions.loginSuccess)
+
+//   yield take(BuildingActions.logout)
+//   // ..
+//   yield put(BuildingActions.logoutSuccess)
+
+// }
+
+export default [takeLatest(BuildingTypes.LOAD_REQUEST, loadRequest)];

@@ -4,20 +4,21 @@ import { List } from "@material-ui/core";
 import { Apartment } from "@material-ui/icons";
 
 import SidebarComponent from "../../components/Navigation/Sibebar";
-import { Creators as MenuActions } from "../../store/ducks/Navigation";
+import { Types as MenuTypes } from "../../store/ducks/Navigation";
 import SidebarItem from "../../components/Navigation/SideBarItem";
+import { selectShowMenu } from "../../store/selectors/NavigationSelector";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const showMenu = useSelector(state => state.navigation.showMenu);
+  const showMenu = useSelector(selectShowMenu);
 
   function openMenu() {
-    dispatch(MenuActions.openMenu());
+    dispatch({ type: MenuTypes.OPEN_MENU });
   }
 
   function closeMenu() {
-    dispatch(MenuActions.closeMenu());
+    dispatch({ type: MenuTypes.CLOSE_MENU });
   }
 
   return (
