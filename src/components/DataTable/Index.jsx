@@ -1,41 +1,30 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import MaterialTable, { MTableToolbar } from "material-table";
-import { Button } from "@material-ui/core";
+import MaterialTable from "material-table";
 import PropTypes from "prop-types";
 
-const Datatable = ({ columns, data, labelButton }) => {
+import Toolbar from "./Toolbar";
+
+const Datatable = ({
+  title,
+  columns,
+  data,
+  labelButton,
+  actions,
+  actionsColumnIndex,
+  actionAddData
+}) => {
   return (
     <MaterialTable
-      title="Prédios"
+      title={title}
       columns={columns}
       data={data}
       options={{
-        actionsColumnIndex: -1
+        actionsColumnIndex
       }}
-      actions={[
-        {
-          icon: "edit",
-          tooltip: "Editar",
-          onClick: (event, rowData) => alert("Deseja Editar " + rowData.name)
-        },
-        {
-          icon: "delete",
-          tooltip: "Excluir",
-          onClick: (event, rowData) => alert("deseja Excluir " + rowData.name)
-        }
-      ]}
+      actions={actions}
       components={{
-        Toolbar: props => (
-          <div style={{ backgroundColor: "#e8eaf5" }}>
-            <div style={{ padding: "10px 10px" }}>
-              <Button variant="contained" color="primary">
-                {labelButton}
-              </Button>
-            </div>
-            <MTableToolbar {...props} />
-          </div>
-        )
+        Toolbar: props => <Toolbar labelButton={labelButton} spread={props} actionAddData={actionAddData}/>
       }}
     />
   );
@@ -46,7 +35,12 @@ Datatable.propTypes = {
   columns: PropTypes.array.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.array.isRequired,
-  labelButton: PropTypes.string.isRequired
+  // eslint-disable-next-line react/forbid-prop-types
+  actions: PropTypes.array.isRequired,
+  labelButton: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  actionsColumnIndex: PropTypes.number.isRequired,
+  actionAddData: PropTypes.func.isRequired
 };
 
 export default Datatable;
