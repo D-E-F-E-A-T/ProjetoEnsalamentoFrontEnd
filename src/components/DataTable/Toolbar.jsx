@@ -4,6 +4,7 @@ import { MTableToolbar } from "material-table";
 import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 
+// eslint-disable-next-line react/prop-types
 const Datatable = ({ labelButton, spread, actionAddData }) => {
   return (
     <div style={{ backgroundColor: "#e8eaf5" }}>
@@ -19,8 +20,6 @@ const Datatable = ({ labelButton, spread, actionAddData }) => {
 
 Datatable.propTypes = {
   labelButton: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  spread: PropTypes.array.isRequired,
   actionAddData: PropTypes.func.isRequired
 };
 

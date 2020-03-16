@@ -24,7 +24,13 @@ const Datatable = ({
       }}
       actions={actions}
       components={{
-        Toolbar: props => <Toolbar labelButton={labelButton} spread={props} actionAddData={actionAddData}/>
+        Toolbar: props => (
+          <Toolbar
+            labelButton={labelButton}
+            spread={props}
+            actionAddData={actionAddData}
+          />
+        )
       }}
     />
   );

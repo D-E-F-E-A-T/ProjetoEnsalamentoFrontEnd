@@ -1,34 +1,40 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import PropTypes from "prop-types";
 
-const ModalDialog = ({
-  open,
+export default function AlertDialog({
   handleClose,
-  dialogTitle,
-  dialogContent,
+  open,
+  title,
+  contentText,
+  content,
   dialogActions
-}) => {
+}) {
   return (
     <div>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="dialog-title">
-        <DialogTitle id="dialog-title">{dialogTitle}</DialogTitle>
-        <DialogContent>{dialogContent}</DialogContent>
-        <DialogActions>{dialogActions}</DialogActions>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{contentText}</DialogContentText>
+          <div>{content}</div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
-};
-
-ModalDialog.propTypes = {
-  open: PropTypes.func.isRequired,
-  labelButton: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  actionsColumnIndex: PropTypes.number.isRequired,
-  actionAddData: PropTypes.func.isRequired
-};
-
-export default ModalDialog;
+}

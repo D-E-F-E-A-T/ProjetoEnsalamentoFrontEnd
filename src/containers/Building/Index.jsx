@@ -1,42 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import DataTable from "../../components/DataTable/Index";
 import Columns from "./Columns";
 import Actions from "../../Common/Datatable/ActionsDefault";
-import Form from "./FormDialog";
-
-const Data = [
-  { name: "Prédio 1", status: 0 },
-  {
-    name: "Prédio 2",
-    status: 1
-  }
-];
+import ModalDialogForm from "./FormDialog";
+import { selectBuildings } from "../../store/selectors/BuildingSelector";
+import { Types as BuildingTypes } from "../../store/ducks/Building";
 
 const BuildingList = () => {
-  const [openFormBuilding, setOpenFormBuilding] = React.useState(false);
+  const [modalIsOpen, SetModalIsOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const buildings = useSelector(selectBuildings);
+
+  useEffect(() => {
+    dispatch({ type: BuildingTypes.LOAD_REQUEST });
+  }, [dispatch]);
 
   const handleClickOpenFormBuilding = () => {
-    setOpenFormBuilding(true);
+    SetModalIsOpen(true);
   };
-
-  const handleCloseFormBuilding = () => {
-    setOpenFormBuilding(false);
+  const handleClickCloseFormBuilding = () => {
+    SetModalIsOpen(false);
   };
 
   return (
     <>
       <DataTable
+        title="Prédios"
         columns={Columns}
-        data={Data}
+        data={buildings}
         labelButton="Adicionar Prédio"
         actionAddData={handleClickOpenFormBuilding}
         actions={Actions}
         actionsColumnIndex={-1}
       />
-      <Form
-        isOpen={openFormBuilding}
-        handleClose={handleCloseFormBuilding}
+      <ModalDialogForm
+        modalIsOpen={modalIsOpen}
+        handleClickCloseFormBuilding={handleClickCloseFormBuilding}
       />
     </>
   );
