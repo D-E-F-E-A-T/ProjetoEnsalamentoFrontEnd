@@ -1,10 +1,10 @@
 import React from "react";
-import { Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import Building from "./Buildings";
+import IndexView from "../views/Index";
 
 export default () => (
   <Switch>
-    <Building />
+    <Route path="/" component={IndexView} />
   </Switch>
 );
