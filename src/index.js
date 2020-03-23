@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import { ThemeProvider } from "@material-ui/styles";
+import { CssBaseline } from "@material-ui/core";
 
 import Index from "./containers/App";
-import Theme from "./theme";
+import Themes from "./themes";
 import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={Theme.default}>
+    <ThemeProvider theme={Themes.default}>
       <CssBaseline />
       <Index />
     </ThemeProvider>
