@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Drawer, IconButton } from "@material-ui/core";
+import { Drawer, IconButton, List } from "@material-ui/core";
 import { ArrowBack as ArrowBackIcon } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -12,6 +12,9 @@ import useStyles from "./styles";
 
 import { Types as MenuTypes } from "../../store/ducks/Navigation";
 import { selectShowMenu } from "../../store/selectors/NavigationSelector";
+
+import ItemsSidebar from "./ItensSidebar";
+import SidebarLink from "../SidebarLink";
 
 const Sidebar = () => {
   const classes = useStyles();
@@ -71,6 +74,16 @@ const Sidebar = () => {
           />
         </IconButton>
       </div>
+      <List className={classes.sidebarList}>
+        {ItemsSidebar.map(link => (
+          <SidebarLink
+            key={link.id}
+            location={link.link}
+            isSidebarOpened={sidebarIsOpen}
+            {...link}
+          />
+        ))}
+      </List>
     </Drawer>
   );
 };

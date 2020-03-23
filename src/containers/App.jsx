@@ -19,18 +19,19 @@ const Index = () => {
   return (
     <div className={classes.root}>
       <>
-        <Header />
-        <Sidebar />
-        <div
-          className={classnames(classes.content, {
-            [classes.contentShift]: sidebarIsOpen
-          })}
-        >
-          <div className={classes.fakeToolbar} />
-          <BrowserRouter>
+        <BrowserRouter>
+          <Header />
+          <Sidebar />
+          <div
+            className={classnames(classes.content, {
+              [classes.contentShift]: sidebarIsOpen
+            })}
+          >
+            <div className={classes.fakeToolbar} />
+
             <Routes />
-          </BrowserRouter>
-        </div>
+          </div>
+        </BrowserRouter>
       </>
     </div>
   );

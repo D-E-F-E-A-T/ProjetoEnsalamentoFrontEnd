@@ -6,14 +6,16 @@ import { createActions, createReducer } from "reduxsauce";
 export const { Types, Creators } = createActions({
   toogleMenu: [],
   openMenu: [],
-  closeMenu: []
+  closeMenu: [],
+  setLocation: ["location"]
 });
 
 /**
  * Handlers
  */
 const INITIAL_STATE = {
-  showMenu: true
+  showMenu: true,
+  location: ""
 };
 
 const ToogleMenu = (state = INITIAL_STATE) => ({
@@ -31,11 +33,17 @@ const CloseMenu = (state = INITIAL_STATE) => ({
   showMenu: false
 });
 
+const SetLocation = (state = INITIAL_STATE, { location }) => ({
+  ...state,
+  location
+});
+
 /**
  * Reducer
  */
 export default createReducer(INITIAL_STATE, {
   [Types.TOOGLE_MENU]: ToogleMenu,
   [Types.OPEN_MENU]: OpenMenu,
-  [Types.CLOSE_MENU]: CloseMenu
+  [Types.CLOSE_MENU]: CloseMenu,
+  [Types.SET_LOCATION]: SetLocation
 });
