@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   Collapse,
   Divider,
@@ -32,7 +33,9 @@ export default function SidebarLink({
 
   // local
   const [isOpen, setIsOpen] = useState(false);
-  const isLinkActive = true;
+
+  const routeLocation = useSelector(state => state.router.location.pathname);
+  const isLinkActive = routeLocation === link;
 
   if (type === "title")
     return (

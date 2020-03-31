@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 import { useSelector } from "react-redux";
 
 import classnames from "classnames";
 
+import history from "../store/history";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Routes from "../routes";
@@ -19,7 +20,7 @@ const Index = () => {
   return (
     <div className={classes.root}>
       <>
-        <BrowserRouter>
+        <ConnectedRouter history={history}>
           <Header />
           <Sidebar />
           <div
@@ -31,7 +32,7 @@ const Index = () => {
 
             <Routes />
           </div>
-        </BrowserRouter>
+        </ConnectedRouter>
       </>
     </div>
   );
