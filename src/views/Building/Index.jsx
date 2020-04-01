@@ -81,7 +81,7 @@ const BuildingView = () => {
   };
   return (
     <MUIDataTable
-      title={"Prédios"}
+      title="Prédios"
       data={data}
       columns={columns}
       options={options}

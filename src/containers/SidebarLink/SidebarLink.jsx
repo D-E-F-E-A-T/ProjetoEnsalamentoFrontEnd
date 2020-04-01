@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { Inbox as InboxIcon } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 
 // styles
@@ -25,7 +26,6 @@ export default function SidebarLink({
   label,
   children,
   isSidebarOpened,
-  location,
   nested,
   type
 }) {
@@ -143,3 +143,27 @@ export default function SidebarLink({
     </>
   );
 }
+
+SidebarLink.propTypes = {
+  link: PropTypes.string.isRequired,
+  icon: PropTypes.oneOfType([
+    PropTypes.elementType,
+    PropTypes.element,
+    PropTypes.node
+  ]).isRequired,
+  label: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.elementType,
+    PropTypes.element,
+    PropTypes.node
+  ]),
+  isSidebarOpened: PropTypes.bool.isRequired,
+  nested: PropTypes.bool,
+  type: PropTypes.string
+};
+
+SidebarLink.defaultProps = {
+  children: null,
+  nested: false,
+  type: ""
+};

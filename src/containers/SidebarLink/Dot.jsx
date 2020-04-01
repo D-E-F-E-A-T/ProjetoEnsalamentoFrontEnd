@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/styles";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 
 // styles
@@ -38,3 +39,8 @@ export default function Dot({ size, color }) {
     />
   );
 }
+
+Dot.propTypes = {
+  size: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired
+};
