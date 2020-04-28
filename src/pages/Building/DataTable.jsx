@@ -39,14 +39,27 @@ const BuildingDatatable = () => {
         empty: true,
         customBodyRender: (value, tableMeta) => {
           return (
-            // eslint-disable-next-line react/button-has-type
-            <button
-              onClick={() => {
-                console.log("data", tableMeta.rowData);
-              }}
-            >
-              Add
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  // eslint-disable-next-line no-console
+                  console.log("data", tableMeta.rowData);
+                }}
+              >
+                Edit
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  // eslint-disable-next-line no-console
+                  console.log("data", tableMeta.rowData);
+                }}
+              >
+                Inactive
+              </button>
+            </>
           );
         }
       }
