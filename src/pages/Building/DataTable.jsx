@@ -1,8 +1,7 @@
 import React from "react";
-import MUIDataTable from "mui-datatables";
-import { Switch, FormControlLabel } from "@material-ui/core";
+import DataTable from "../../components/Databale/DataTable";
 
-const BuildingView = () => {
+const BuildingDatatable = () => {
   const columns = [
     {
       name: "id",
@@ -27,16 +26,27 @@ const BuildingView = () => {
         filterOptions: {
           names: ["Ativo", "Inativo"]
         },
-        customBodyRender: (value, tableMeta, updateValue) => {
+        customBodyRender: value => {
+          return value ? "Sim" : "Não";
+        }
+      }
+    },
+    {
+      name: "Add",
+      options: {
+        filter: false,
+        sort: false,
+        empty: true,
+        customBodyRender: (value, tableMeta) => {
           return (
-            <FormControlLabel
-              label={value ? "Sim" : "Não"}
-              value={value}
-              control={<Switch color="primary" checked={value} value={value} />}
-              onChange={event => {
-                updateValue(event.target.value !== "true");
+            // eslint-disable-next-line react/button-has-type
+            <button
+              onClick={() => {
+                console.log("data", tableMeta.rowData);
               }}
-            />
+            >
+              Add
+            </button>
           );
         }
       }
@@ -45,18 +55,22 @@ const BuildingView = () => {
 
   const data = [
     {
+      id: 1,
       name: "Prédio 1",
       active: true
     },
     {
+      id: 2,
       name: "Prédio 2",
       active: true
     },
     {
+      id: 3,
       name: "Prédio 3",
       active: false
     },
     {
+      id: 4,
       name: "Prédio 4",
       active: true
     }
@@ -79,14 +93,8 @@ const BuildingView = () => {
       }
     }
   };
-  return (
-    <MUIDataTable
-      title="Prédios"
-      data={data}
-      columns={columns}
-      options={options}
-    />
-  );
+
+  return <DataTable data={data} columns={columns} options={options} />;
 };
 
-export default BuildingView;
+export default BuildingDatatable;

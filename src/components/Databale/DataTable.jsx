@@ -2,9 +2,7 @@ import React from "react";
 import MUIDataTable from "mui-datatables";
 import PropTypes from "prop-types";
 
-const DataTable = props => {
-  const [data, columns, options] = props;
-
+const DataTable = ({ data, columns, options }) => {
   return <MUIDataTable data={data} columns={columns} options={options} />;
 };
 

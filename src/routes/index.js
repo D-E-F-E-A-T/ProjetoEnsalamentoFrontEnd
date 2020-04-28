@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import EnsalamentView from "../views/Ensalament/Ensalament";
-import BuildingView from "../views/Building/Index";
+import EnsalamentView from "../pages/Ensalament/Ensalament";
+import BuildingView from "../pages/Building/Building";
 
 export default () => (
   <Switch>
